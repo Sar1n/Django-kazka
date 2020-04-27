@@ -78,9 +78,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #     'default': {
 #        'ENGINE': 'djongo',
 #        'NAME': 'SkazkaApp',
-#         'CLIENT': {
 #            'HOST': 'mongodb+srv://MH:etozhesunrise@cluster-78bcn.gcp.mongodb.net/test?retryWrites=true&w=majority',
-#         }
+#            'PORT':27017
 #     }
 # }
 
