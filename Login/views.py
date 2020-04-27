@@ -1,6 +1,7 @@
 import textwrap
 import pymongo
 import json
+from Login.models import Test
 
 from django.http import HttpResponse
 from django.views.generic.base import View
@@ -10,11 +11,7 @@ def hello(request):
     return HttpResponse("HELLO")
 
 def dispatch(request, *args, **kwargs):
-   
-    client = pymongo.MongoClient("mongodb+srv://MH:etozhesunrise@cluster-78bcn.gcp.mongodb.net/test?retryWrites=true&w=majority")
-    d = dict((db, [collection for collection in client[db].collection_names()])
-             for db in client.database_names())
-    testin = json.dumps(d)
+    testin = Test.ttt(self=0)
     response_text = textwrap.dedent('''\
             <html>
             <head>
