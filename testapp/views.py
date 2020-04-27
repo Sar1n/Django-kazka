@@ -11,7 +11,7 @@ def hello(request):
 
 def dispatch(request, *args, **kwargs):
    
-    client = pymongo.MongoClient('mongodb://MH:etozhesunrise@cluster-shard-00-00-78bcn.gcp.mongodb.net:27017,cluster-shard-00-01-78bcn.gcp.mongodb.net:27017,cluster-shard-00-02-78bcn.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster-shard-0&authSource=admin&retryWrites=true&w=majority')
+    client = pymongo.MongoClient("mongodb+srv://MH:etozhesunrise@cluster-78bcn.gcp.mongodb.net/test?retryWrites=true&w=majority")
     d = dict((db, [collection for collection in client[db].collection_names()])
              for db in client.database_names())
     testin = json.dumps(d)
