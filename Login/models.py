@@ -1,10 +1,14 @@
 import pymongo
 import json
 
-class Test:
+class MongoConnector:
+    def __init__(self):
+        self.client = pymongo.MongoClient("mongodb+srv://MH:etozhesunrise@cluster-78bcn.gcp.mongodb.net/test?retryWrites=true&w=majority")
+        self.db = self.client['project']
+
+class Test(MongoConnector):
     def ttt(self):
-        client = pymongo.MongoClient("mongodb+srv://MH:etozhesunrise@cluster-78bcn.gcp.mongodb.net/test?retryWrites=true&w=majority")
-        d = dict((db, [collection for collection in client[db].collection_names()])
-             for db in client.database_names())
+        d = dict((db, [collection for collection in self.client[db].collection_names()])
+                for db in self.client.database_names())
         testin = json.dumps(d)
         return testin
