@@ -1,7 +1,7 @@
 import textwrap
 import pymongo
 import json
-from Login.models import Test
+from Login.models import *
 
 from django.http import HttpResponse
 from django.views.generic.base import View
@@ -11,7 +11,8 @@ def hello(request):
     return HttpResponse("HELLO")
 
 def dispatch(request, *args, **kwargs):
-    testin = Test.ttt(self=0)
+    test = Test()
+    testin = test.ttt()
     response_text = textwrap.dedent('''\
             <html>
             <head>
