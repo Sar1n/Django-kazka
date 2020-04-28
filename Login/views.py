@@ -8,7 +8,7 @@ from django.views.generic.base import View
 from django.shortcuts import render
 
 def hello(request):
-    return HttpResponse("HELLO")
+    return render(request, 'Login.html')
 
 def dispatch(request, *args, **kwargs):
     test = Test()
