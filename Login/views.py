@@ -5,7 +5,7 @@ from Login.models import *
 
 from django.http import HttpResponse
 from django.views.generic.base import View
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 def hello(request):
     return render(request, 'Login.html')
@@ -26,3 +26,9 @@ def dispatch(request, *args, **kwargs):
             </html>
         '''.format(testin=testin))
     return HttpResponse(response_text)
+
+
+def Test_view(request):
+    test = Test()
+    test.CheckDBWrite("idunnowhatisitem", 6)
+    return redirect('hello:home')
