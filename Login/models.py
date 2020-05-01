@@ -1,5 +1,6 @@
 import pymongo
 import json
+from bson import ObjectId
 
 class MongoConnector:
     def __init__(self):
@@ -14,3 +15,13 @@ class Test(MongoConnector):
                 for db in self.client.database_names())
         testin = json.dumps(d)
         return testin
+
+
+class AddingText(MongoConnector):
+    def DBWrite(self, data):
+        self.db.Tales.insert_one({"1":data})
+    def DBGet(self):
+        Tales = self.db["Tales"]
+        x = Tales.find({"_id":ObjectId('5eac68606e85a5d630614333')}) 
+        #x = Tales.find(ObjectId('5eac68606e85a5d630614333'))
+        return x

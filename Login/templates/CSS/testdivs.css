@@ -1,0 +1,30 @@
+
+.body{
+    background-color: #3366CC; /* Цвет фона веб-страницы */
+   } 
+
+
+.container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    background-color: #ffbf00;
+}
+.red {
+    background-color: #f00;
+    width: 200px;
+    height: 150px;
+    margin: 5px auto;
+}
+.blue { 
+    background-color: #0f0;
+    width: 200px;
+    height: 150px;
+    margin: 5px auto;
+}
+.green {
+    background-color: #00f;
+    width: 200px;
+    height: 150px;
+    margin: 5px auto;
+}

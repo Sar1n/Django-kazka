@@ -5,6 +5,7 @@ from Login.models import *
 from django.http import HttpResponse, Http404
 from django.views.generic.base import View
 from django.shortcuts import render, redirect
+from django.http.response import JsonResponse
 
 def hello(request):
     return render(request, 'Login.html')
@@ -39,6 +40,28 @@ def Test_Add(request):
         return HttpResponse()
     #else:
         #raise Http404
+
+def Text_Add(request):
+    textdata = request.POST['textdata']
+    text = AddingText()
+    text.DBWrite(textdata)
+    #if request.is_ajax() and request.POST:
+        #req = request.POST
+        #textdata = req.cleaned_data
+        #text = AddingText()
+        #text.DBWrite(textdata)
+    return HttpResponse()
+    #else:
+        #raise Http404
+
+def Text_Reveal(request):
+    text = AddingText()
+    x = text.DBGet()
+    response = {}
+    response['result'] = x
+    return HttpResponse(x)
+
+
 
 def Test_Subtract(request):
     if request.is_ajax() and request.POST:
