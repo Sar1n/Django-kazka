@@ -1,6 +1,6 @@
 *.log
 *.pot
 *.pyc
-__pycache__/
+mysite/__pycache__/
 data/
 local_settings.py
