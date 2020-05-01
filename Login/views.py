@@ -2,7 +2,7 @@ import textwrap
 import json
 from Login.models import *
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.views.generic.base import View
 from django.shortcuts import render, redirect
 
@@ -30,4 +30,20 @@ def dispatch(request, *args, **kwargs):
 def Test_view(request):
     test = Test()
     test.CheckDBWrite("idunnowhatisitem", 6)
-    return redirect('hello:home')
+    return HttpResponse()
+
+def Test_Add(request):
+    #if request.is_ajax() and request.POST:
+        test = Test()
+        test.CheckDBWrite("testing adding", 6)
+        return HttpResponse()
+    #else:
+        #raise Http404
+
+def Test_Subtract(request):
+    if request.is_ajax() and request.POST:
+        test = Test()
+        test.CheckDBWrite("testing substracting", 6)
+        return HttpResponse()
+    else:
+        raise Http404
