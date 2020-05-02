@@ -11,6 +11,11 @@ class Tale(models.Model):
 
 class Sentence(models.Model):
 	authorID = models.ForeignKey(User, on_delete=models.CASCADE, related_name='AuthorID')
-	taleID = models.ForeignKey(Tale, on_delete=models.CASCADE, related_name='TaleID')
+	taleID = models.ForeignKey(Tale, on_delete=models.CASCADE, related_name='TaleID', )
 	dateAdded = models.DateTimeField(name='dateAdded')
 	sentence = models.TextField(name='Sentence', max_length=128)
+
+	class Meta:
+		indexes = [
+			models.Index(fields=['taleID','authorID'])
+		]
