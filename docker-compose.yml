@@ -1,21 +1,23 @@
 version: '3'
 
 services:
-  mysql:
-    image: mysql:latest
-    ports:
-      - "3308:3308"
-    environment:
-        MYSQL_DATABASE: 'kazkaprod'
-        MYSQL_USER: 'kazka_admin'
-        MYSQL_PASSWORD: 'kazkar'
-        MYSQL_ROOT_PASSWORD: 'kazkar_root'
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: ["./prebuild.sh"]
+    container_name: kazka
     volumes:
       - .:/code
     ports:
       - "8000:8000"
     depends_on:
       - mysql
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+        MYSQL_DATABASE: 'kazkaprod'
+        MYSQL_USER: 'kazka_admin'
+        MYSQL_PASSWORD: 'kazkar'
+        MYSQL_ROOT_PASSWORD: 'kazkar_root'
