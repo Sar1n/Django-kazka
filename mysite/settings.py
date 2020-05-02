@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'Login',
     'MainGame',
     'UserProfile',
+    'Tales',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,14 +78,16 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#        'ENGINE': 'djongo',
-#        'NAME': 'SkazkaApp',
-#            'HOST': 'mongodb+srv://MH:etozhesunrise@cluster-78bcn.gcp.mongodb.net/test?retryWrites=true&w=majority',
-#            'PORT':27017
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'kazkaprod',
+        'USER': 'kazka_admin',
+        'PASSWORD': 'kazkar',
+        'HOST': 'mysql',
+        'PORT': '3306',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

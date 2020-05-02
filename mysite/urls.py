@@ -19,6 +19,6 @@ from Login import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login', views.dispatch, name='login'),
-    path('hello/', include('Login.urls', namespace='hello')),
+    # path('login', views.dispatch, name='login'),
+    # path('hello/', include('Login.urls', namespace='hello')),
 ]
