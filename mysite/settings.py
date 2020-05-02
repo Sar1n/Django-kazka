@@ -100,10 +100,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kazkaprod',
-        #'USER': 'kazka_admin',
-        #'PASSWORD': 'kazkar',
-        'USER': 'root',        
-        'PASSWORD': 'P@ssw0rd',
+        'USER': 'kazka_admin',
+        'PASSWORD': 'kazkar',
+        #'USER': 'root',        
+        #'PASSWORD': 'P@ssw0rd',
         'HOST': 'localhost',
         'PORT': '3306',
     }

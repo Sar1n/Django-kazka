@@ -74,9 +74,11 @@ from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
+# authentication test >
 def login(request):
   return render(request, 'login1.html')
 
 @login_required
 def home(request):
   return render(request, 'home.html')
+# authentication test <

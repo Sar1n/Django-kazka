@@ -4,3 +4,4 @@
 mysite/__pycache__/
 data/
 local_settings.py
+.vscode/
