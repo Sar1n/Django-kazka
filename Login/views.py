@@ -70,3 +70,13 @@ from django.http.response import JsonResponse
 #         return HttpResponse()
 #     else:
 #         raise Http404
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
+def login(request):
+  return render(request, 'login1.html')
+
+@login_required
+def home(request):
+  return render(request, 'home.html')

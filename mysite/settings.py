@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles'
+    'django.contrib.staticfiles',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,23 @@ TEMPLATES = [
     },
 ]
 
+# authentication test >
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.linkedin.LinkedinOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SOCIAL_AUTH_FACEBOOK_KEY = '585270295701492'
+SOCIAL_AUTH_FACEBOOK_SECRET = '54c42be0f83ce1dc87091e40e591bedf'
+
+LOGIN_URL = 'login1'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login1'
+# authentication test <
+
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
@@ -82,9 +100,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kazkaprod',
-        'USER': 'kazka_admin',
-        'PASSWORD': 'kazkar',
-        'HOST': 'mysql',
+        #'USER': 'kazka_admin',
+        #'PASSWORD': 'kazkar',
+        'USER': 'root',        
+        'PASSWORD': 'P@ssw0rd',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
