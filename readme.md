@@ -25,3 +25,13 @@
 2. Stop docker container
 
 `docker-compose down`
+
+3. Show docker containers
+
+`docker ps`
+
+4. Enter docker container
+
+For Windows: `winpty docker exec -it <container ID> bash`
+
+For Linux: `docker exec -it <container ID> bash`
