@@ -102,9 +102,10 @@ DATABASES = {
         'NAME': 'kazkaprod',
         'USER': 'kazka_admin',
         'PASSWORD': 'kazkar',
-        #'USER': 'root',        
+        'HOST': 'mysql',
+        #'USER': 'root',
         #'PASSWORD': 'P@ssw0rd',
-        'HOST': 'localhost',
+        #'HOST': 'localhost',
         'PORT': '3306',
     }
 }
