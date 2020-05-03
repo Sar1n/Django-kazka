@@ -8,6 +8,7 @@ class Tale(models.Model):
 	lastAuthorID = models.ForeignKey(User, on_delete=models.CASCADE, related_name='lastAuthorID')
 	dateStarted = models.DateTimeField(name='dateStarted')
 	dateFinished = models.DateTimeField(name='dateFinished')
+	TaleName = models.TextField(name="TaleName", max_length=50)
 
 class Sentence(models.Model):
 	authorID = models.ForeignKey(User, on_delete=models.CASCADE, related_name='AuthorID')
