@@ -15,17 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from Login import views
+from Login import views as LoginViews
+from Tales import views as TalesViews
+from MainGame import views as MainGameViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('login', views.dispatch, name='login'),
     # path('hello/', include('Login.urls', namespace='hello')),
 
+
+    #path('Tales/', TalesViews.AddSentence, name="Tales"),
+    path('Tales/', include("Tales.urls", namespace="Tales")),
+    #path('MainGame/', MainGameViews.CreateTale, name="MainGame"),
+    path('MainGame/', include("MainGame.urls", namespace="MainGame")),
+
+
     # authentication test >
-    path("login1/", views.login, name="login1"),
+    path("login1/", LoginViews.login, name="login1"),
     # path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path('social-auth/', include('social_django.urls', namespace="social")),
-    path("", views.home, name="home"),
+    path("", LoginViews.home, name="home"),
     # authentication test <
 ]
