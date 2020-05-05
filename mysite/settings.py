@@ -32,10 +32,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'Login',
-    'MainGame',
-    'UserProfile',
-    'Tales',
+    'mysite.Apps.Login',
+    'mysite.Apps.MainGame',
+    'mysite.Apps.UserProfile',
+    'mysite.Apps.Tales',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,0 +1,13 @@
+{% extends 'AddNewTale.html' %}
+
+{% block content %}
+
+
+<ul class="list-group">
+    {% for tale in tales %}
+    <li class="list-group-item">{{tale.name }}
+    </li>
+
+    {% endfor %}
+</ul>
+{% endblock content %}

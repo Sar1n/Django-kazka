@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from Login import views as LoginViews
-from Tales import views as TalesViews
-from MainGame import views as MainGameViews
+from mysite.Apps.Login import views as LoginViews
+from mysite.Apps.Tales import views as TalesViews
+from mysite.Apps.MainGame import views as MainGameViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,9 +26,9 @@ urlpatterns = [
 
 
     #path('Tales/', TalesViews.AddSentence, name="Tales"),
-    path('Tales/', include("Tales.urls", namespace="Tales")),
+    path('Tales/', include("mysite.Apps.Tales.urls", namespace="Tales")),
     #path('MainGame/', MainGameViews.CreateTale, name="MainGame"),
-    path('MainGame/', include("MainGame.urls", namespace="MainGame")),
+    path('MainGame/', include("mysite.Apps.MainGame.urls", namespace="MainGame")),
 
 
     # authentication test >
