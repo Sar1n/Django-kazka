@@ -19,19 +19,24 @@ def CreateTale(request):
 
 
 def AddTale(request):
-    tale = TestData(dateStarted = datetime.now(), TaleName = request.POST['textdata'])
-    #Заполняем поля чисто для не null значений
-    tale.length = 0
-    tale.isFinished = 0
-    tale.save()
-    
-    return HttpResponse()
+    if request.is_ajax() and request.POST:
+        tale = TestData(dateStarted = datetime.now(), TaleName = request.POST['textdata'])
+        #Заполняем поля чисто для не null значений
+        tale.length = 0
+        tale.isFinished = 0
+        tale.save()
+        return HttpResponse()
+    else:
+        raise Http404
 
 
 
 def RetrieveTales(request):
-    tales = TestData.objects.all()
-    context = {
-        "tales" : tales,
-    }
-    return render(request, "testadd.html", context)
+    if request.is_ajax():
+        tales = TestData.objects.all()
+        context = {
+            "tales" : tales,
+        }
+        return render(request, "testadd.html", context)
+    else:
+        raise Http404

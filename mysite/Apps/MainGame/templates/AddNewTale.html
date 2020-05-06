@@ -58,13 +58,8 @@
             <button id='btn-retrieve' class="btn btn-success btn-lg" >Показать доступные сказки</button>
         </a>
 
-        <ul class="list-group">
-            {% for tale in tales %}
-            <li class="list-group-item">{{tale.name }}
-            </li>
-        
-            {% endfor %}
-        </ul>
+        <div id='div-tales'>
+        </div>
 
     </div>
 </div>
@@ -106,9 +101,10 @@
                         url: "ajax/retrieve/",
                         type: "POST",
                         //data: {"textdata": textdata},
-                        success: function()
+                        success: function(htmldata)
                         {
-                            alert("AJAX OK");
+                            //alert("AJAX OK");
+                            document.getElementById('div-tales').innerHTML = htmldata;
                         }
                     }
                 )
