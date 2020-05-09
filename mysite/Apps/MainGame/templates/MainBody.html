@@ -1,4 +1,4 @@
-{% extends "wrapper.html" %}
+{% extends "wrappermaingame.html" %}
 
 {% block content %}
 <body  class="bg-dark">
@@ -69,18 +69,20 @@
   
   <div class="container text-white pt-5">
           <div class="col-md-12 ">
-              <p class="display-4">Незавершенні казки:</p>
+              <p class="display-4">Незавершенні казки: {{notfinished }} </p>
           </div>
           <div class="col-md-12 ">
-              <p class="display-4">Завершенні казки:</p>
+              <p class="display-4">Завершенні казки: {{finished }}</p>
           </div>
           <div class="col-md-12 ">
-              <p class="display-4">Найбільш активний автор:</p>
+              <p class="display-4">Найбільш активний автор: {{mostauthor }}</p>
           </div>
                   <div class="col-md-12 ">
-              <p class="display-4">Найменш активний автор:</p>
+              <p class="display-4">Найменш активний автор: {{leastauthor }}</p>
           </div>
   </div>
+
+
   <div class="container text-white pt-5">
       <div class="row">
           <div class="col-md-4 ">
@@ -98,16 +100,66 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Назва</th>
+        <th scope="col">Взяти участь</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <th scope="row">1</th>
         <td>Гавноед сосал пидару Диме и чмокал</td>
+        <td><div class = "addclass" value = "1"><button id = "1" type="button" class="btn  btn-lg btn-info " data-toggle="modal" data-target="#modal-add-sentence" value = "1">Ты кнопка блядь</button></div></td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Вторая незаконченная сказка</td>
+        <td><div class = "addclass" value = "2"><button id = "2" type="button" class="btn  btn-lg btn-info " data-toggle="modal" data-target="#modal-add-sentence" value = "2">Ты кнопка блядь</button></div></td>
       </tr>
     </tbody>
   </table>
   </div>
-  
+
+
+  <div id="modal-add-sentence" class="modal" tabindex="-1" role="dialog">
+    
+  </div>
+  <script type="text/javascript">
+    $('.addclass').click
+    (
+        function(e)
+        {
+            //var buttondata = this.value
+            //var data = $(this).serialize();
+            //alert(data)
+
+            var el = $(e.target.activeElement);
+            alert(el)
+            var str = $(el).getAttribute("value");
+            alert(str)
+            var buttondata = $el.getAttribute("value"); 
+            alert(buttondata)
+           // $el.button('loading'); // or whatever else you want to do
+
+
+            //var buttondata = document.getElementById("1").value
+            $.ajax
+            (
+                {
+                    url: "ajax/GetAddSentenceRespose/",
+                    type: "POST",
+                    data: {"buttonvalue": buttondata},
+                    success: function(htmldata)
+                    {
+                        document.getElementById('modal-add-sentence').innerHTML = htmldata;
+                    }
+                }
+            )
+        .fail(function() {
+        alert("fail");
+        });
+        }
+    );
+</script>
+
+
 </body>
 {% endblock %}

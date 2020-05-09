@@ -14,7 +14,25 @@ from django.template import loader
 # Create your views here.
 
 def CreateTale(request):
-    return render(request, 'MainBody.html')
+    context = {
+        "notfinished" : "5",
+        "finished" : "1",
+        "mostauthor" : "Евгений Понасенков",
+        "leastauthor" : "Вася Пупкин"
+    }
+    return render(request, 'MainBody.html', context)
+
+
+def GetAddSentenceRespose(request):
+    if request.is_ajax():
+        context = {
+            "taleid" : request.POST.get('buttonvalue'),
+            "title" : "Tale Title",
+            "lastsentence" : "Tale last sentence"
+        }
+        return render(request, "addsentenceform.html", context)
+    else:
+        raise Http404
     
 
 
