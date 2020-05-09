@@ -18,6 +18,7 @@ from django.urls import path, include
 from mysite.Apps.Login import views as LoginViews
 from mysite.Apps.Tales import views as TalesViews
 from mysite.Apps.MainGame import views as MainGameViews
+from mysite.Apps.UserProfile import views as UserProfileViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,9 +27,11 @@ urlpatterns = [
 
 
     #path('Tales/', TalesViews.AddSentence, name="Tales"),
-    path('Tales/', include("mysite.Apps.Tales.urls", namespace="Tales")),
     #path('MainGame/', MainGameViews.CreateTale, name="MainGame"),
-    path('MainGame/', include("mysite.Apps.MainGame.urls", namespace="MainGame")),
+    path('tales/', include("mysite.Apps.Tales.urls", namespace="Tales")),
+    path('maingame/', include("mysite.Apps.MainGame.urls", namespace="MainGame")),
+    path('login/', include("mysite.Apps.Login.urls", namespace="Login")),
+    path('profile/', include("mysite.Apps.UserProfile.urls", namespace="UserProfile")),
 
 
     # authentication test >
