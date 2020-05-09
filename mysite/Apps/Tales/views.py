@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from mysite.Apps.Tales.models import *
+from .models import *
 
 from django.http import HttpResponse, Http404
 from django.views.generic.base import View
