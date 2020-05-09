@@ -7,8 +7,8 @@ from django.views.generic.base import View
 from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
 
-# def hello(request):
-#     return render(request, 'Login.html')
+def hello(request):
+  return render(request, 'Login_prod.html')
 
 # def dispatch(request, *args, **kwargs):
 #     test = Test()
