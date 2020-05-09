@@ -14,7 +14,7 @@ from django.template import loader
 # Create your views here.
 
 def CreateTale(request):
-    return render(request, 'AddNewTale.html')
+    return render(request, 'MainBody.html')
     
 
 
