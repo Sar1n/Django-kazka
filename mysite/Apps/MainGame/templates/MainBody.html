@@ -94,16 +94,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Сказка про гавноеда</td>
-        <td><div class = "addclass" value = "Гавноед"><button id = "1" type="button" class="btn btn-info " data-toggle="modal" data-target="#modal-add-sentence">Продовжити казку</button></div></td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Вторая незаконченная сказка</td>
-        <td><div class = "addclass" value = "Вторая"><button id = "2" type="button" class="btn btn-info " data-toggle="modal" data-target="#modal-add-sentence">Продовжити казку</button></div></td>
-      </tr>
+      {% for tale in tales %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{tale.TaleName}}</td>
+          <td><div class = "addclass" value={{tale.id}}><button type="button" class="btn btn-info " data-toggle="modal" data-target="#modal-add-sentence">Продовжити казку</button></div></td>
+        </tr>
+      {% endfor %}
     </tbody>
   </table>
   </div>

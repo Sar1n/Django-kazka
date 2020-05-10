@@ -13,12 +13,14 @@ from django.template import loader
 
 # Create your views here.
 
-def CreateTale(request):
+def index(request):
+    data = UserlessTale.objects.all().filter(isFinished=0)
     context = {
         "notfinished" : "5",
         "finished" : "1",
         "mostauthor" : "Евгений Понасенков",
-        "leastauthor" : "Вася Пупкин"
+        "leastauthor" : "Вася Пупкин",
+        "tales" : data,
     }
     return render(request, 'MainBody.html', context)
 
