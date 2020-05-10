@@ -15,9 +15,11 @@ from django.template import loader
 
 def index(request):
     data = UserlessTale.objects.all().filter(isFinished=0)
+    notfin = UserlessTale.objects.all().filter(isFinished=0).count()
+    fin = UserlessTale.objects.all().filter(isFinished=1).count()
     context = {
-        "notfinished" : "5",
-        "finished" : "1",
+        "notfinished" : notfin,
+        "finished" : fin,
         "mostauthor" : "Евгений Понасенков",
         "leastauthor" : "Вася Пупкин",
         "tales" : data,
@@ -25,12 +27,16 @@ def index(request):
     return render(request, 'MainBody.html', context)
 
 
-def GetAddSentenceRespose(request):
+def GetAddSentenceResponse(request):
     if request.is_ajax():
+        taleid = request.POST.get('buttonvalue')
+        tale = UserlessTale.objects.all().filter(id=taleid)[0]
+        lastsentence = UserlessSentence.objects.all().filter(taleID=taleid).order_by('id')[0]
         context = {
-            "taleid" : request.POST.get('buttonvalue'),
-            "title" : "Tale",
-            "lastsentence" : "Tale last sentence"
+            "taletitle" : tale.TaleName,
+            "talelength" : tale.Length,
+            "lastsentence" : lastsentence,
+            "taleid" : taleid,
         }
         return render(request, "addsentenceform.html", context)
     else:
@@ -50,12 +56,10 @@ def AddTale(request):
 
 
 
-# def RetrieveTales(request):
-#     if request.is_ajax():
-#         tales = TestData.objects.all()
-#         context = {
-#             "tales" : tales,
-#         }
-#         return render(request, "testadd.html", context)
-#     else:
-#         raise Http404
+def AddSentence(request):
+    if request.is_ajax() and request.POST:
+        sentence = UserlessSentence(taleID = request.POST['taleid'], dateAdded = datetime.now(), Sentence = request.POST['sentence'])
+        sentence.save()
+        return HttpResponse()
+    else:
+        raise Http404

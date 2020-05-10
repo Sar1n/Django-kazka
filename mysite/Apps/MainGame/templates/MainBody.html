@@ -18,8 +18,10 @@
       </ul>
     </div>
   </nav>
-      <div class="col-lg-12 text-center text-white pt-3">
-  <button type="button" class="btn2  btn-lg btn-success" data-toggle="modal" data-target="#myModal">Почати нову гру</button> </div>
+
+  <div class="col-lg-12 text-white pt-3 row justify-content-md-center">
+    <button type="button" class="btn2 col-lg-6 btn-lg btn-success btn-block" data-toggle="modal" data-target="#myModal">Почати нову гру</button>
+  </div>
 
   <div id="myModal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -107,7 +109,33 @@
 
 
   <div id="modal-add-sentence" class="modal" tabindex="-1" role="dialog">
-    
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>...</p>
+          <p></p>
+          <form>
+          <div class="form-group">
+            <p>Доповніть казку одним реченням:</p>
+            <textarea id="txt-addsentence" class="form-control" wrap="soft" placeholder="Продовжіть казку...">
+            </textarea>
+            <div id="div-argumentinvalid-2"></div>
+            <div id="div-test"></div>
+          </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+              <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Завершити</button>
+          <button id = "btn-addsentence" type="button" class="btn btn-success", value = {{taleid}}>Продовжити</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script type="text/javascript"> //Формирование всплывающего окна для продолжения сказки
@@ -119,7 +147,7 @@
             $.ajax
             (
                 {
-                    url: "ajax/GetAddSentenceRespose/",
+                    url: "ajax/GetAddSentenceResponse/",
                     type: "POST",
                     data: {"buttonvalue": buttondata},
                     success: function(htmldata)
@@ -172,6 +200,44 @@
         }
     );
   </script>
+
+<script type="text/javascript"> //Обработчик кнопки добавления нового предложения
+  $('#btn-addsentence').click
+  (
+      function()
+      {
+          document.getElementById('div-test').innerHTML = "ну ало. сработай";
+          var sentence = document.getElementById("txt-addsentence").value
+          if (sentence.trim() !== '') //Проверка все ли поля заполнены
+          {
+            var buttondata = $(this).attr("value");
+            alert(buttondata);
+            $.ajax
+            (
+                {
+                    url: "ajax/AddSentence/",
+                    type: "POST",
+                    data: {
+                      "sentence": sentence,
+                      "taleid": buttondata,
+                      },
+                    success: function()
+                    {
+                        //Нужно закрыть всплывающее окно
+                    }
+                }
+            )
+            .fail(function() {
+              alert("fail");
+            });
+            }
+          else //Не все поля заполнены
+          {
+            document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
+          }
+      }
+  );
+</script>
 
 
 </body>
