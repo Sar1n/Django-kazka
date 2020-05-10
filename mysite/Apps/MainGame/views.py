@@ -27,7 +27,7 @@ def GetAddSentenceRespose(request):
     if request.is_ajax():
         context = {
             "taleid" : request.POST.get('buttonvalue'),
-            "title" : "Tale Title",
+            "title" : "Tale",
             "lastsentence" : "Tale last sentence"
         }
         return render(request, "addsentenceform.html", context)
@@ -38,23 +38,22 @@ def GetAddSentenceRespose(request):
 
 def AddTale(request):
     if request.is_ajax() and request.POST:
-        tale = TestData(dateStarted = datetime.now(), TaleName = request.POST['textdata'])
-        #Заполняем поля чисто для не null значений
-        tale.length = 0
-        tale.isFinished = 0
+        tale = UserlessTale(TaleName = request.POST['title'], dateStarted = datetime.now(), Length = 1, isFinished = 0, isBeingWritten = 0)
         tale.save()
+        sentence = UserlessSentence(taleID = tale, dateAdded = datetime.now(), Sentence = request.POST['firstsentence'])
+        sentence.save()
         return HttpResponse()
     else:
         raise Http404
 
 
 
-def RetrieveTales(request):
-    if request.is_ajax():
-        tales = TestData.objects.all()
-        context = {
-            "tales" : tales,
-        }
-        return render(request, "testadd.html", context)
-    else:
-        raise Http404
+# def RetrieveTales(request):
+#     if request.is_ajax():
+#         tales = TestData.objects.all()
+#         context = {
+#             "tales" : tales,
+#         }
+#         return render(request, "testadd.html", context)
+#     else:
+#         raise Http404
