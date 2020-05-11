@@ -7,6 +7,7 @@ from django.views.generic.base import View
 from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
 
+from django.contrib.auth.models import User
 
 from django.template import loader
 
@@ -47,11 +48,15 @@ def GetAddSentenceResponse(request):
 
 def AddTale(request):
     if request.is_ajax() and request.POST:
-        tale = UserlessTale(TaleName = request.POST['title'], dateStarted = datetime.now(), Length = 1, isFinished = 0, isBeingWritten = 0)
-        tale.save()
-        sentence = UserlessSentence(taleID = tale, dateAdded = datetime.now(), Sentence = request.POST['firstsentence'])
-        sentence.save()
-        return HttpResponse()
+        currentuser = request.user
+        if request.user.is_authenticated:
+            tale = Tale(TaleName = request.POST['title'], dateStarted = datetime.now(), Length = 1, isFinished = 0, isBeingWritten = 0, lastAuthorID = currentuser)
+            tale.save()
+            sentence = Sentence(taleID = tale, dateAdded = datetime.now(), Sentence = request.POST['firstsentence'], authorID = currentuser)
+            sentence.save()
+            return HttpResponse()
+        else:
+            raise Http404
     else:
         raise Http404
 

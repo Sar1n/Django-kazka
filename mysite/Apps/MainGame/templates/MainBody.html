@@ -135,7 +135,7 @@
                                         },
                                       success: function()
                                       {
-                                          //Нужно закрыть всплывающее окно
+                                          $('#modal-add-sentence').trigger('click.dismiss.bs.modal')
                                       }
                                   }
                               )
@@ -181,7 +181,7 @@
                         },
                       success: function(htmldata)
                       {
-                          //Нужно закрыть всплывающее окно
+                          $('#myModal').trigger('click.dismiss.bs.modal')
                       }
                   }
               )
