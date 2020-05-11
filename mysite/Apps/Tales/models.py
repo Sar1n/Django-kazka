@@ -8,7 +8,7 @@ class Tale(models.Model):
 	isFinished = models.BooleanField(default=0, name='isFinished')
 	lastAuthorID = models.ForeignKey(User, on_delete=models.CASCADE, related_name='lastAuthorID')
 	dateStarted = models.DateTimeField(name='dateStarted')
-	dateFinished = models.DateTimeField(name='dateFinished')
+	dateFinished = models.DateTimeField(name='dateFinished', null=True, blank=True)
 	TaleName = models.TextField(name="TaleName", max_length=50, default="defaultTaleName")
 	isBeingWritten = models.BooleanField(default=0, name='isBeingWritten')
 
