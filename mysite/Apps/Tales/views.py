@@ -10,5 +10,5 @@ from django.http.response import JsonResponse
 # Create your views here.
 
 
-def AddSentence(request):
-    return render(request, 'AddSentence.html')
+def tales(request):
+    return render(request, 'tales.html')
