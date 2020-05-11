@@ -1,8 +1,7 @@
 {% extends 'MainBody.html' %}
 
 {% block content %}
-
-<div class="modal-dialog" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">{{taletitle}}</h5>
@@ -27,48 +26,10 @@
           {% if talelength >= 10 %}
             <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Завершити</button>
           {% endif %}
-        <button id = "btn-addsentence" type="button" class="btn btn-success", value = {{taleid}}>Продовжити</button>
+          <button id = "btn-addsentence" type="button" class="btn btn-success" value = {{taleid}}>Продовжити</button>
       </div>
     </div>
-</div>
+  </div>
 
-
-<script type="text/javascript"> //Обработчик кнопки добавления нового предложения
-  $('#btn-addsentence').click
-  (
-      function()
-      {
-          document.getElementById('div-test').innerHTML = "ну ало. сработай";
-          var sentence = document.getElementById("txt-addsentence").value
-          if (sentence.trim() !== '') //Проверка все ли поля заполнены
-          {
-            var buttondata = $(this).attr("value");
-            alert(buttondata);
-            $.ajax
-            (
-                {
-                    url: "ajax/AddSentence/",
-                    type: "POST",
-                    data: {
-                      "sentence": sentence,
-                      "taleid": buttondata,
-                      },
-                    success: function()
-                    {
-                        //Нужно закрыть всплывающее окно
-                    }
-                }
-            )
-            .fail(function() {
-              alert("fail");
-            });
-            }
-          else //Не все поля заполнены
-          {
-            document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
-          }
-      }
-  );
-</script>
 
 {% endblock content %}

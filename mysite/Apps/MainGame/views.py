@@ -31,7 +31,7 @@ def GetAddSentenceResponse(request):
     if request.is_ajax():
         taleid = request.POST.get('buttonvalue')
         tale = UserlessTale.objects.all().filter(id=taleid)[0]
-        lastsentence = UserlessSentence.objects.all().filter(taleID=taleid).order_by('id')[0]
+        lastsentence = UserlessSentence.objects.all().filter(taleID=taleid).order_by('-id')[0]
         context = {
             "taletitle" : tale.TaleName,
             "talelength" : tale.Length,
@@ -58,7 +58,11 @@ def AddTale(request):
 
 def AddSentence(request):
     if request.is_ajax() and request.POST:
-        sentence = UserlessSentence(taleID = request.POST['taleid'], dateAdded = datetime.now(), Sentence = request.POST['sentence'])
+        taleid = request.POST['taleid']
+        tale = UserlessTale.objects.all().filter(id=taleid)[0]
+        tale.Length += 1
+        tale.save()
+        sentence = UserlessSentence(taleID = tale, dateAdded = datetime.now(), Sentence = request.POST['sentence'])
         sentence.save()
         return HttpResponse()
     else:

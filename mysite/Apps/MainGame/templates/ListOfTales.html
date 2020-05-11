@@ -1,0 +1,13 @@
+{% extends 'MainBody.html' %}
+
+{% block content %}
+
+    {% for tale in tales %}
+    <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{tale.TaleName}}</td>
+        <td><div class = "addclass" value={{tale.id}}><button type="button" class="btn btn-info " data-toggle="modal" data-target="#modal-add-sentence">Продовжити казку</button></div></td>
+    </tr>
+    {% endfor %}
+
+{% endblock content %}

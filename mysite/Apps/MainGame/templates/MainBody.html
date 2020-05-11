@@ -108,34 +108,7 @@
   </div>
 
 
-  <div id="modal-add-sentence" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>...</p>
-          <p></p>
-          <form>
-          <div class="form-group">
-            <p>Доповніть казку одним реченням:</p>
-            <textarea id="txt-addsentence" class="form-control" wrap="soft" placeholder="Продовжіть казку...">
-            </textarea>
-            <div id="div-argumentinvalid-2"></div>
-            <div id="div-test"></div>
-          </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-              <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Завершити</button>
-          <button id = "btn-addsentence" type="button" class="btn btn-success", value = {{taleid}}>Продовжити</button>
-        </div>
-      </div>
-    </div>
+  <div id="modal-add-sentence" class="modal" tabindex="-1" role="dialog"> <!--Всплывающее окно для продолжения сказки-->
   </div>
 
   <script type="text/javascript"> //Формирование всплывающего окна для продолжения сказки
@@ -153,6 +126,40 @@
                     success: function(htmldata)
                     {
                         document.getElementById('modal-add-sentence').innerHTML = htmldata;
+                        // Динамически вставляем форму в страницу
+                        //$('#modal-add-sentence').html(data);
+                        // Привязываем событие
+                        $('#btn-addsentence').bind('click',function(event)
+                          {
+                            var sentence = document.getElementById("txt-addsentence").value
+                            if (sentence.trim() !== '') //Проверка все ли поля заполнены
+                            {
+                              $.ajax
+                              (
+                                  {
+                                      url: "ajax/AddSentence/",
+                                      type: "POST",
+                                      data: {
+                                        "sentence": sentence,
+                                        "taleid": buttondata,
+                                        },
+                                      success: function()
+                                      {
+                                          //Нужно закрыть всплывающее окно
+                                      }
+                                  }
+                              )
+                              .fail(function() {
+                                alert("fail");
+                              });
+                              }
+                            else //Не все поля заполнены
+                            {
+                              document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
+                            }
+
+                            event.preventDefault();
+                          });
                     }
                 }
             )
@@ -184,7 +191,6 @@
                         },
                       success: function(htmldata)
                       {
-                          document.getElementById('modal-add-sentence').innerHTML = htmldata;
                           //Нужно закрыть всплывающее окно
                       }
                   }
@@ -201,43 +207,43 @@
     );
   </script>
 
-<script type="text/javascript"> //Обработчик кнопки добавления нового предложения
-  $('#btn-addsentence').click
-  (
-      function()
-      {
-          document.getElementById('div-test').innerHTML = "ну ало. сработай";
-          var sentence = document.getElementById("txt-addsentence").value
-          if (sentence.trim() !== '') //Проверка все ли поля заполнены
-          {
-            var buttondata = $(this).attr("value");
-            alert(buttondata);
-            $.ajax
-            (
-                {
-                    url: "ajax/AddSentence/",
-                    type: "POST",
-                    data: {
-                      "sentence": sentence,
-                      "taleid": buttondata,
-                      },
-                    success: function()
-                    {
-                        //Нужно закрыть всплывающее окно
-                    }
-                }
-            )
-            .fail(function() {
-              alert("fail");
-            });
+
+  <!--<script type="text/javascript"> //Обработчик кнопки добавления нового предложения
+    $('#btn-addsentence').click
+    (
+        function()
+        {
+            var sentence = document.getElementById("txt-addsentence").value
+            if (sentence.trim() !== '') //Проверка все ли поля заполнены
+            {
+              var taleid = document.getElementById('taleid').value
+              alert(taleid);
+              $.ajax
+              (
+                  {
+                      url: "ajax/AddSentence/",
+                      type: "POST",
+                      data: {
+                        "sentence": sentence,
+                        "taleid": taleid,
+                        },
+                      success: function()
+                      {
+                          //Нужно закрыть всплывающее окно
+                      }
+                  }
+              )
+              .fail(function() {
+                alert("fail");
+              });
+              }
+            else //Не все поля заполнены
+            {
+              document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
             }
-          else //Не все поля заполнены
-          {
-            document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
-          }
-      }
-  );
-</script>
+        }
+    );
+  </script> -->
 
 
 </body>
