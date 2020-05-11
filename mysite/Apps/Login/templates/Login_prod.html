@@ -22,27 +22,40 @@
   <div class="container text-white pt-3">
     <div class="row">
       <div class="col-md-6 text-center">
-        <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">Авторизація</button></div>
+        <button class="btn btn-success btn-lg btn-rounded" data-toggle="modal" data-target="#elegantModalForm">Авторизація</button></div>
         <div class="col-md-6 text-center">
           <button class="btn btn-lg btn-danger" data-toggle="modal" data-target="#myModal2">Інструкція</button>
         </div>
       </div>
     </div>
-    <div id="myModal" class="modal fade" tabindex="-1">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-body">Лежать + сосать</div>
-          <button class="btn btn-primary mb-2">
-            <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook
-            </a>
+    <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <!--Content-->
+      <div class="modal-content form-elegant">
+        <!--Header-->
+        <div class="modal-header text-center">
+          <h3 class="modal-title w-100 text-center" id="myModalLabel"><strong>Вхід за допомогою</strong></h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
           </button>
-          <div class="modal-footer">
-            <button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+        </div>
+        <!--Body-->
+        <div class="modal-body mx-4">
+          <!--Body--> 
+          <div class="row my-3 d-flex justify-content-center">
+            <!--Facebook-->
+            <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a" ><img src="https://img.icons8.com/color/48/000000/facebook.png"/>  <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook
+            </a><i class="fab fa-facebook-f text-center"></i></button>
+            <!--GitHub-->
+            <button type="button" class="btn btn-white btn-rounded z-depth-1a"><img src="https://img.icons8.com/cute-clipart/64/000000/github.png"/><i class="fab fa-google-plus-g"></i></button>
           </div>
         </div>
+        <!--/.Content-->
       </div>
     </div>
-    <div id="myModal2" class="modal fade" tabindex="-1">
+  </div>
+      <div id="myModal2" class="modal fade" tabindex="-1">
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-body">Лежать </div>
@@ -52,120 +65,104 @@
         </div>
       </div>
     </div>
-  <!-- <nav class="navbar navbar-dark bg-dark justify-content-around ">
-     <div>
-       <button type="button" class="btn  btn-lg btn-success ">Авторизація</button> </div>
-       <button class="btn btn-info btn-lg btn-danger" data-toggle="modal" data-target="#myModal">Інструкція</button>
-<div id="myModal" class="modal fade" tabindex="-1">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-body">Лежать + сосать</div>
-      <div class="modal-footer">
-        <button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+  <div class="container pt-5">
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-lg-6 mb-4">
+
+        <!-- Tale 1 -->
+        <div class="card example-1 scrollbar-ripe-malinka">
+          <div class="card-body">
+            <h4 id="section1"><strong>First tale</strong></h4>
+            <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
+              qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
+              mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
+              qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
+            Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+            <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
+              qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
+              mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
+              qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
+            Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+          </div>
+        </div>
+        <!-- Tale 1 -->
+
       </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-lg-6 mb-4">
+
+        <!-- Tale 2 -->
+        <div class="card example-1 scrollbar-cyan bordered-cyan">
+          <div class="card-body">
+            <h4 id="section1"><strong>Second tale</strong></h4>
+            <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
+              qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
+              mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
+              qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
+            Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+            <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
+              qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
+              mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
+              qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
+            Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+          </div>
+        </div>
+        <!-- Tale 2 -->
+
+      </div>
+      <!-- Grid column -->
+
     </div>
+    <!-- Grid row -->
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-lg-6 mb-4">
+
+        <!-- Tale 3 -->
+        <div class="card example-1 scrollbar-deep-purple bordered-deep-purple">
+          <div class="card-body">
+            <h4 id="section1"><strong>Third tale</strong></h4>
+            <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
+              qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
+              mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
+              qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
+            Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+          </div>
+        </div>
+        <!-- Tale 3 -->
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-lg-6">
+
+        <!-- Tale 4 -->
+        <div class="card example-1 scrollbar-dusty-grass ">
+          <div class="card-body">
+            <h4 id="section1"><strong>Fourth tale</strong></h4>
+            <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
+              qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
+              mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
+              qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
+            Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+          </div>
+        </div>
+        <!-- Tale 4 -->
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row --> 
   </div>
-</div>
-</nav> -->
-</div>
-<div class="container pt-5">
-  <div class="row">
-
-    <!-- Grid column -->
-    <div class="col-lg-6 mb-4">
-
-      <!-- Tale 1 -->
-      <div class="card example-1 scrollbar-ripe-malinka">
-        <div class="card-body">
-          <h4 id="section1"><strong>First tale</strong></h4>
-          <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
-            qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
-            mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
-            qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
-          Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
-          <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
-            qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
-            mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
-            qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
-          Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
-        </div>
-      </div>
-      <!-- Tale 1 -->
-
-    </div>
-    <!-- Grid column -->
-
-    <!-- Grid column -->
-    <div class="col-lg-6 mb-4">
-
-      <!-- Tale 2 -->
-      <div class="card example-1 scrollbar-cyan bordered-cyan">
-        <div class="card-body">
-          <h4 id="section1"><strong>Second tale</strong></h4>
-          <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
-            qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
-            mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
-            qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
-          Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
-          <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
-            qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
-            mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
-            qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
-          Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
-        </div>
-      </div>
-      <!-- Tale 2 -->
-
-    </div>
-    <!-- Grid column -->
-
-  </div>
-  <!-- Grid row -->
-
-  <!-- Grid row -->
-  <div class="row">
-
-    <!-- Grid column -->
-    <div class="col-lg-6 mb-4">
-
-      <!-- Tale 3 -->
-      <div class="card example-1 scrollbar-deep-purple bordered-deep-purple">
-        <div class="card-body">
-          <h4 id="section1"><strong>Third tale</strong></h4>
-          <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
-            qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
-            mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
-            qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
-          Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
-        </div>
-      </div>
-      <!-- Tale 3 -->
-
-    </div>
-    <!-- Grid column -->
-
-    <!-- Grid column -->
-    <div class="col-lg-6">
-
-      <!-- Tale 4 -->
-      <div class="card example-1 scrollbar-dusty-grass ">
-        <div class="card-body">
-          <h4 id="section1"><strong>Fourth tale</strong></h4>
-          <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
-            qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
-            mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
-            qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
-          Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
-        </div>
-      </div>
-      <!-- Tale 4 -->
-
-    </div>
-    <!-- Grid column -->
-
-  </div>
-  <!-- Grid row --> 
-</div>
 </div>
 </body>
 
