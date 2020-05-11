@@ -4,6 +4,5 @@ from mysite.Apps.Tales.models import Tale, Sentence, User, UserlessSentence, Use
 # Register your models here.
 admin.site.register(Tale)
 admin.site.register(Sentence)
-#admin.site.register(TestData)
 admin.site.register(UserlessTale)
 admin.site.register(UserlessSentence)

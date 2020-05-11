@@ -56,12 +56,3 @@ class UserlessSentence(models.Model):
 		]
 	def __str__(self):
 		return self.id
-
-# class TestData(models.Model):
-# 	length = models.IntegerField(default=0,	name='Length')
-# 	isFinished = models.BooleanField(default=0, name='isFinished')
-# 	dateStarted = models.DateTimeField(name='dateStarted')
-# 	TaleName = models.TextField(name="TaleName", max_length=50, default="FefaultTaleName")
-
-# 	def __str__(self):
-# 		return self.TaleName
