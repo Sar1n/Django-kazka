@@ -19,7 +19,7 @@ def login(request):
 
 @login_required
 def home(request):
-  return render(request, 'MainBody.html')
+  return redirect('/maingame/', permanent=True)
 # authentication test <
 
 #def redirected_login(request):
