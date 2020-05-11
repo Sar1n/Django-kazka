@@ -10,9 +10,10 @@ from django.http.response import JsonResponse
 
 from django.template import loader
 
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required
 def index(request):
     data = UserlessTale.objects.all().filter(isFinished=0)
     notfin = UserlessTale.objects.all().filter(isFinished=0).count()

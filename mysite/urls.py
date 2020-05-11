@@ -19,6 +19,7 @@ from mysite.Apps.Login import views as LoginViews
 from mysite.Apps.Tales import views as TalesViews
 from mysite.Apps.MainGame import views as MainGameViews
 from mysite.Apps.UserProfile import views as UserProfileViews
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,14 +31,14 @@ urlpatterns = [
     #path('MainGame/', MainGameViews.CreateTale, name="MainGame"),
     path('tales/', include("mysite.Apps.Tales.urls", namespace="Tales")),
     path('maingame/', include("mysite.Apps.MainGame.urls", namespace="MainGame")),
-    path('login/', include("mysite.Apps.Login.urls", namespace="Login")),
+    #path('login/', include("mysite.Apps.Login.urls", namespace="Login")),
     path('profile/', include("mysite.Apps.UserProfile.urls", namespace="UserProfile")),
 
 
     # authentication test >
-    path("login1/", LoginViews.login, name="login1"),
-    # path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("login/", LoginViews.login, name="login"),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path('social-auth/', include('social_django.urls', namespace="social")),
-    path("", LoginViews.home, name="home"),
+    path('', LoginViews.home, name="home"),
     # authentication test <
 ]

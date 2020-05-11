@@ -84,10 +84,10 @@ AUTHENTICATION_BACKENDS = [
 SOCIAL_AUTH_FACEBOOK_KEY = '585270295701492'
 SOCIAL_AUTH_FACEBOOK_SECRET = '54c42be0f83ce1dc87091e40e591bedf'
 
-LOGIN_URL = 'login1'
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_URL = 'logout'
-LOGOUT_REDIRECT_URL = 'login1'
+LOGOUT_REDIRECT_URL = 'login'
 # authentication test <
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
@@ -100,12 +100,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kazkaprod',
-        'USER': 'kazka_admin',
-        'PASSWORD': 'kazkar',
-        'HOST': 'mysql',
-        #'USER': 'root',
-        #'PASSWORD': 'P@ssw0rd',
-        #'HOST': 'localhost',
+        #'USER': 'kazka_admin',
+        #'PASSWORD': 'kazkar',
+        #'HOST': 'mysql',
+        'USER': 'root',
+        'PASSWORD': 'P@ssw0rd',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
