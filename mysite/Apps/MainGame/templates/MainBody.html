@@ -19,11 +19,11 @@
     </div>
   </nav>
 
-  <div class="row justify-content-md-center text-white">
+  <div class="row justify-content-md-center text-white w-100">
     <h1>Байкар-технар</h1>
   </div>
 
-  <div class="row justify-content-md-center">
+  <div class="row justify-content-md-center w-100">
     <div class="col-7">
       <div class="container text-white pt-5">
         <table class="table table-dark">
@@ -35,7 +35,7 @@
               <th scope="col">Взяти участь</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="listoftales">
             {% for tale in tales %}
               <tr>
                 <th scope="row">{{forloop.counter}}</th>
@@ -50,13 +50,13 @@
     <div class="col-md-auto">
       <div class="container text-white pt-5">
         <div class="col m-4">
-              <div class="col p-3">
+              <div class="col pt-3">
                 <button type="button" class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#myModal">Почати нову гру</button>
               </div>
-              <div class="col p-3">
+              <div class="col pt-3">
                   <button type="button" class="btn  btn-lg btn-primary btn-block">Випадкова завершена казка</button>
               </div>
-              <div class="col p-3">
+              <div class="col pt-3">
                   <button type="button" class="btn  btn-lg btn-info text-white btn-block">Випадкова незавершена казка</button>
               </div>
               <div class="col p-3">
@@ -103,10 +103,12 @@
   <div id="modal-add-sentence" class="modal" tabindex="-1" role="dialog"> <!--Всплывающее окно для продолжения сказки-->
   </div>
 
+
+
   <script type="text/javascript"> //Формирование всплывающего окна для продолжения сказки
     $('.addclass').click
     (
-        function(e)
+        function()
         {
             var buttondata = $(this).attr("value")
             $.ajax
@@ -182,6 +184,75 @@
                       success: function(htmldata)
                       {
                           $('#myModal').trigger('click.dismiss.bs.modal')
+                          $.ajax
+                          (
+                              {
+                                  url: "ajax/rfhtales/",
+                                  type: "POST",
+                                  success: function(htmldata)
+                                  {
+                                    document.getElementById('listoftales').innerHTML = htmldata;
+                                    // Привязываем событие
+                                    $('.addclass').bind('click',function(event)
+                                      {
+                                              var buttondata = $(this).attr("value")
+
+                                              $.ajax
+                                              (
+
+                                                  {
+                                                      url: "ajax/GetAddSentenceResponse/",
+                                                      type: "POST",
+                                                      data: {"buttonvalue": buttondata},
+                                                      success: function(htmldata)
+                                                      {
+                                                          document.getElementById('modal-add-sentence').innerHTML = htmldata;
+                                                          // Привязываем событие
+                                                          $('#btn-addsentence').bind('click',function(event)
+                                                            {
+                                                              var sentence = document.getElementById("txt-addsentence").value
+                                                              if (sentence.trim() !== '') //Проверка все ли поля заполнены
+                                                              {
+                                                                $.ajax
+                                                                (
+                                                                    {
+                                                                        url: "ajax/AddSentence/",
+                                                                        type: "POST",
+                                                                        data: {
+                                                                          "sentence": sentence,
+                                                                          "taleid": buttondata,
+                                                                          },
+                                                                        success: function()
+                                                                        {
+                                                                            $('#modal-add-sentence').trigger('click.dismiss.bs.modal')
+                                                                        }
+                                                                    }
+                                                                )
+                                                                .fail(function() {
+                                                                  alert("fail1");
+                                                                });
+                                                                }
+                                                              else //Не все поля заполнены
+                                                              {
+                                                                document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
+                                                              }
+
+                                                              event.preventDefault();
+                                                            });
+                                                      }
+                                                  }
+                                              )
+                                          .fail(function() {
+                                          alert("fail2");
+                                          });
+                                        event.preventDefault();
+                                      });
+                                  }
+                              }
+                          )
+                          .fail(function() {
+                            alert("fail3");
+                          });
                       }
                   }
               )
@@ -196,7 +267,6 @@
         }
     );
   </script>
-
 
 </body>
 {% endblock %}

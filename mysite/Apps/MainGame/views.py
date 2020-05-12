@@ -16,9 +16,9 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def index(request):
-    data = UserlessTale.objects.all().filter(isFinished=0)
-    notfin = UserlessTale.objects.all().filter(isFinished=0).count()
-    fin = UserlessTale.objects.all().filter(isFinished=1).count()
+    data = Tale.objects.all().filter(isFinished=0)
+    notfin = Tale.objects.all().filter(isFinished=0).count()
+    fin = Tale.objects.all().filter(isFinished=1).count()
     context = {
         "notfinished" : notfin,
         "finished" : fin,
@@ -32,8 +32,8 @@ def index(request):
 def GetAddSentenceResponse(request):
     if request.is_ajax():
         taleid = request.POST.get('buttonvalue')
-        tale = UserlessTale.objects.all().filter(id=taleid)[0]
-        lastsentence = UserlessSentence.objects.all().filter(taleID=taleid).order_by('-id')[0]
+        tale = Tale.objects.all().filter(id=taleid)[0]
+        lastsentence = Sentence.objects.all().filter(taleID=taleid).order_by('-id')[0]
         context = {
             "taletitle" : tale.TaleName,
             "talelength" : tale.Length,
@@ -47,7 +47,7 @@ def GetAddSentenceResponse(request):
 
 
 def AddTale(request):
-    if request.is_ajax() and request.POST:
+    if request.is_ajax():
         currentuser = request.user
         if request.user.is_authenticated:
             tale = Tale(TaleName = request.POST['title'], dateStarted = datetime.now(), Length = 1, isFinished = 0, isBeingWritten = 0, lastAuthorID = currentuser)
@@ -63,13 +63,28 @@ def AddTale(request):
 
 
 def AddSentence(request):
-    if request.is_ajax() and request.POST:
-        taleid = request.POST['taleid']
-        tale = UserlessTale.objects.all().filter(id=taleid)[0]
-        tale.Length += 1
-        tale.save()
-        sentence = UserlessSentence(taleID = tale, dateAdded = datetime.now(), Sentence = request.POST['sentence'])
-        sentence.save()
-        return HttpResponse()
+    if request.is_ajax():
+        currentuser = request.user
+        if request.user.is_authenticated:
+            taleid = request.POST['taleid']
+            tale = Tale.objects.all().filter(id=taleid)[0]
+            tale.Length += 1
+            tale.save()
+            sentence = Sentence(taleID = tale, dateAdded = datetime.now(), Sentence = request.POST['sentence'], authorID = currentuser)
+            sentence.save()
+            return HttpResponse()
+        else:
+            raise Http404
+    else:
+        raise Http404
+
+
+def rfhtales(request):
+    if request.is_ajax():
+        data = Tale.objects.all().filter(isFinished=0)
+        context = {
+        "tales" : data,
+        }
+        return render(request, "ListOfTales.html", context)
     else:
         raise Http404
