@@ -1,4 +1,4 @@
-<!doctype html>
+
 <html>
 <head>
 	<meta charset="utf-8">
@@ -17,7 +17,7 @@
 		<div class="collapse navbar-collapse " id="navbarTogglerDemo01">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active">
-					<a class="nav-link " href="{% url 'MainGame:index' %}">Головна <span class="sr-only">(current)</span></a>
+					<a class="nav-link " href="#">Головна <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Вихід</a>
@@ -25,41 +25,24 @@
 			</ul>
 		</div>
 	</nav>
-	<div class="container text-white pt-5">
-		<div class="row">
-			<img src="cover-3-1.jpg" alt="..." class="img-thumbnail rounded float-left d-block" width="30%">
-			<div class=" float-right">
-				<div class="col-md-12 ">
-					<p class="display-4">Ім'я:</p>
-				</div>
-				<div class="col-md-12 ">
-					<p class="display-4">Мої казки:</p>
-				</div>
-				<div class="col-md-12 ">
-					<p class="display-4">Завершенні казки:</p>
-				</div>
-				<div class="col-md-12 ">
-					<p class="display-4">Незавершенні казки:</p>
+	<header>
+		<div class="view grey lighten-3">
+			<div class="mask">
+				<div class="container h-50">
+					<div class="row align-items-center h-100">
+						<div class="col-md-6 text-white">
+							<h1 class="mb-4">Привіт, <span class="text-warning">(user name)</span></h1>
+							<p class="mb-4 pb-2">Ти приєднався до нас <span class="text-warning">20.03.2018</span>. За цей час взяв участь в <span class="text-warning">50</span> казках. Став автором <span class="text-warning">12</span> найкумедніших історій. </p>
+							<button type="button" class="btn btn-primary btn-rounded btn-md ml-md-0">Мої казки (учасник)</button>
+							<button type="button" class="btn btn-outline-light btn-rounded btn-md">Мої казки(автор)</button>
+						</div>
+						<div class="col-md-6">
+							<img src="bookboy.svg" alt="" class="img-fluid">
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container text-white pt-5 text-center">
-			<div class="row">
-				<div class="col-lg-6"><button type="button" class="btn btn-primary btn-lg">Мої завершенні казки</button></div>
-				<div class="col-lg-6"><button type="button" class="btn btn-info btn-lg">Мої завершенні казки(автор)</button></div>
-			</div>
-		</div>
-	</div>
-<div class="waveWrapper waveAnimation">
-  <div class="waveWrapperInner bgTop">
-    <div class="wave waveTop" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-top.png')"></div>
-  </div>
-  <div class="waveWrapperInner bgMiddle">
-    <div class="wave waveMiddle" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-mid.png')"></div>
-  </div>
-  <div class="waveWrapperInner bgBottom">
-    <div class="wave waveBottom" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-bot.png')"></div>
-  </div>
-</div>
+	</header>
 </body>
 </html>
