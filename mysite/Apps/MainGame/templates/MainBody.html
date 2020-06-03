@@ -1,6 +1,6 @@
-<!-- {% extends "wrappermaingame.html" %}
+<!-- {% extends "wrappermaingame.html" %}-->
 
-{% block content %} -->
+{% block content %} 
 
 <html>
 <head>
@@ -72,7 +72,8 @@
                   <button type="button" class="btn  btn-lg btn-primary btn-block">Випадкова завершена казка</button>
                   <button type="button" class="btn  btn-lg btn-info text-white btn-block">Випадкова незавершена казка</button>
                   <a class="btn  btn-lg btn-light btn-block" href="{% url 'Tales:tales' %}">Перелік завершених казок</a>
-                  <img src="bookboy.svg" alt="" class="img-fluid">
+                  {% load static %} 
+                  <img src="{% static "bookboy.svg" %}" alt="dude arting" class="img-fluid">
         </div>
       </div>
     </div>

@@ -14,7 +14,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
   crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="login_scroll.css">
+  {% load static %} 
+  <link rel="stylesheet" href="{% static "login_scroll.css" %}">
 
 </head>
 
@@ -76,7 +77,9 @@
 <ul>
 <li>Дати назву новій казці і написати Перше речення.</li>
 <li>Продовжити нісенітницю іншого гравця. Зверніть увагу, що побачити можете тільки останнє речення казки і написати лише одне.</li>
-<li>Можливість завершити казку з'явиться тільки, якщо в ній буде не менше 10 речень.</li><ul></div>  <p class="text-center">    <img src="bookboy.svg" alt="" class="img-fluid" style="max-height: 350px; max-width: 250px;"> </p>
+<li>Можливість завершити казку з'явиться тільки, якщо в ній буде не менше 10 речень.</li><ul></div>
+  <p class="text-center"> {% load static %} <img src="{% static "bookboy.svg" %}" alt="" class="img-fluid" style="max-height: 350px; max-width: 250px;">
+  </p>
         </div>
       </div>
     </div>
