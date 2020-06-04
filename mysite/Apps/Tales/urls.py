@@ -4,5 +4,7 @@ from . import views
 app_name = 'Tales'
 
 urlpatterns = [
-    path('', views.tales, name='tales'),
+    path('', views.index, name='index'), 
+    path('author', views.authorindex, name='authorindex'), 
+    path('ajax/GetTale/', views.GetTale, name='GetTale'),
 ]

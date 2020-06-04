@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 def login(request):
   tales = [""] * 4
   for i in range (4):
-    dataset = UserlessSentence.objects.all().filter(taleID=i+1)
+    dataset = Sentence.objects.all().filter(taleID=i+1)
     for obj in dataset:
       tales[i] += obj.Sentence + '. '
   context = {
@@ -22,7 +22,7 @@ def login(request):
         "second_tale" : tales[1],
         "third_tale" : tales[2],
         "fourth_tale" : tales[3],
-    }
+  }
   return render(request, 'Login_prod.html', context)
 
 @login_required

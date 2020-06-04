@@ -4,7 +4,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{taletitle}} ({{talelength}} речень)</h5>
+        <h5 class="modal-title">{{taletitle}} (кількість речень: {{talelength}})</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -13,7 +13,6 @@
         <h4>... {{lastsentence.Sentence}}</h4>
         <form>
         <div class="form-group">
-          <p>Доповніть казку одним реченням:</p>
           <textarea id="txt-addsentence" class="form-control" wrap="soft" placeholder="Продовжіть казку..."></textarea>
           <div id="div-argumentinvalid-2"></div>
           <div id="div-test"></div>
@@ -21,10 +20,12 @@
         </form>
       </div>
       <div class="modal-footer">
-          {% if talelength >= 3 %}
-            <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Завершити</button>
-          {% endif %}
-          <button id = "btn-addsentence" type="button" class="btn btn-success" value = {{taleid}}>Продовжити</button>
+          <div id="btn-closetale" value = "{{taleid}}">
+            {% if talelength >= 3 %}
+              <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Завершити</button>
+            {% endif %}
+          </div>
+          <button id="btn-addsentence" type="button" class="btn btn-success" value = "{{taleid}}">Продовжити</button>
       </div>
     </div>
   </div>

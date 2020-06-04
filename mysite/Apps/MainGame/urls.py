@@ -9,4 +9,6 @@ urlpatterns = [
     path('ajax/GetAddSentenceResponse/', views.GetAddSentenceResponse, name='GetAddSentenceResponse'),
     path('ajax/AddSentence/', views.AddSentence, name='AddSentence'),
     path('ajax/rfhtales/', views.rfhtales, name='rfhtales'),
+    path('ajax/GetRandomResponse/', views.GetRandomResponse, name='GetRandomResponse'),
+    path('ajax/CloseTale/', views.CloseTale, name='CloseTale'),
 ]

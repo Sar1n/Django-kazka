@@ -17,10 +17,10 @@
 		<div class="collapse navbar-collapse " id="navbarTogglerDemo01">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active">
-					<a class="nav-link " href="#">Головна <span class="sr-only">(current)</span></a>
+					<a class="nav-link " href="{% url 'MainGame:index' %}">Головна <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Вихід</a>
+					<a class="nav-link" href="{% url 'logout' %}">Вихід</a>
 				</li>
 			</ul>
 		</div>
@@ -31,13 +31,14 @@
 				<div class="container h-50">
 					<div class="row align-items-center h-100">
 						<div class="col-md-6 text-white">
-							<h1 class="mb-4">Привіт, <span class="text-warning">(user name)</span></h1>
-							<p class="mb-4 pb-2">Ти приєднався до нас <span class="text-warning">20.03.2018</span>. За цей час взяв участь в <span class="text-warning">50</span> казках. Став автором <span class="text-warning">12</span> найкумедніших історій. </p>
-							<button type="button" class="btn btn-primary btn-rounded btn-md ml-md-0">Мої казки (учасник)</button>
-							<button type="button" class="btn btn-outline-light btn-rounded btn-md">Мої казки(автор)</button>
+							<h1 class="mb-4">Привіт, <span class="text-warning">{{user.first_name}}</span></h1>
+							<p class="mb-4 pb-2">Ти приєднався до нас <span class="text-warning">{{date}}</span>. За цей час взяв участь в <span class="text-warning">{{participation}}</span> {{kaz}}. Став автором <span class="text-warning">{{author}}</span> {{istor}}. </p>
+							<a type="button" class="btn btn-primary btn-rounded btn-md ml-md-0" href="{% url 'Tales:index' %}">Мої казки (як учасник)</a>
+							<a type="button" class="btn btn-info btn-rounded btn-md" href="{% url 'Tales:authorindex' %}">Мої казки (як автор)</a>
 						</div>
 						<div class="col-md-6">
-							<img src="bookboy.svg" alt="" class="img-fluid">
+							{% load static %} 
+                  			<img src="{% static "profileimage.svg" %}" alt="dude do be chillin" class="img-fluid">
 						</div>
 					</div>
 				</div>

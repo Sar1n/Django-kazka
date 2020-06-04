@@ -1,27 +1,19 @@
-<!-- {% extends "wrappermaingame.html" %}-->
+{% extends "wrappermaingame.html" %}
 
-{% block content %} 
+{% block content %}
 
-<html>
-<head>
-  <meta charset="utf-8">
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="mainBody.css">
-  <script src="profile.js"></script>
-</head>
-<body  class="bg-dark">
+<body class="bg-dark">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark topnav-right">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark topnav-right">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse " id="navbarTogglerDemo01">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a class="nav-link " href="{% url 'UserProfile:profile' %}">Welcome, <span class="text-warning">{{ user.username }}</span> <span class="sr-only">(current)</span></a>
+          <a class="nav-link " href="{% url 'UserProfile:profile' %}">Вітаємо, <span
+              class="text-warning">{{ user.first_name }}</span> <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout' %}">Вихід</a>
@@ -37,43 +29,47 @@
   <div class="row justify-content-md-center w-100">
     <div class="col-7">
       <div class="container text-white pt-5">
-                    <h2>Поточні ігри</h2>
+        <h2>Поточні ігри</h2>
         <div class="table-wrapper-scroll-y my-custom-scrollbar scrollbar-dusty-grass">
-        <table class="table table-dark">
-          <thead>
-            <tr>
-              <th scope="col"></th>
-              <th scope="col">Назва</th>
-              <th scope="col">Взяти участь</th>
-            </tr>
-          </thead>
-          <tbody id="listoftales">
-            {% for tale in tales %}
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Назва</th>
+                <th scope="col">Взяти участь</th>
+              </tr>
+            </thead>
+            <tbody id="listoftales">
+              {% for tale in tales %}
               <tr>
                 <th scope="row">{{forloop.counter}}</th>
                 <td>{{tale.TaleName}}</td>
-                <td><div class = "addclass" value={{tale.id}}><button type="button" class="btn btn-info " data-toggle="modal" data-target="#modal-add-sentence">Продовжити казку</button></div></td>
+                <td>
+                  <div class="addclass" value={{tale.id}}><button type="button" class="btn btn-info "
+                      data-toggle="modal" data-target="#modal-add-sentence">Продовжити казку</button></div>
+                </td>
               </tr>
-               <tr>
-                <th scope="row">{{forloop.counter}}</th>
-                <td>{{tale.TaleName}}</td>
-                <td><div class = "addclass" value={{tale.id}}><button type="button" class="btn btn-info " data-toggle="modal" data-target="#modal-add-sentence">Продовжити казку</button></div></td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <div class="col-md-auto">
       <div class="container text-white pt-5">
         <div class="col m-4 bg-dark">
-                <button type="button" class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#myModal">Почати нову гру</button>
-                  <button type="button" class="btn  btn-lg btn-primary btn-block">Випадкова завершена казка</button>
-                  <button type="button" class="btn  btn-lg btn-info text-white btn-block">Випадкова незавершена казка</button>
-                  <a class="btn  btn-lg btn-light btn-block" href="{% url 'Tales:tales' %}">Перелік завершених казок</a>
-                  {% load static %} 
-                  <img src="{% static "bookboy.svg" %}" alt="dude arting" class="img-fluid">
+          <div style="padding-bottom: 5px;"><button type="button" class="btn btn-lg btn-success btn-block"
+              data-toggle="modal" data-target="#myModal">Почати нову гру</button></div>
+          <div style="padding-top: 5px; padding-bottom: 5px;" class="randomclosed"><button type="button"
+              class="btn  btn-lg btn-primary btn-block" data-toggle="modal" data-target="#modal-random-tale">Випадкова
+              завершена казка</button></div>
+          <div style="padding-top: 5px; padding-bottom: 5px;" class="addclass" value="random"><button type="button"
+              class="btn  btn-lg btn-info text-white btn-block" data-toggle="modal"
+              data-target="#modal-add-sentence">Випадкова незавершена казка</button></div>
+          {% load static %}
+          <img src="{% static "mainimage.svg" %}" alt="dude do be reading" class="img-fluid">
+          <a class="btn  btn-lg btn-light btn-block"
+            href="{% url 'Tales:index' %}">Архів казок</a>
         </div>
       </div>
     </div>
@@ -103,181 +99,245 @@
               <textarea id="txt-sentence" class="form-control" wrap="soft" placeholder="Перше речення"></textarea>
             </div>
           </form>
-          <div id = "div-argumentinvalid"></div> <!--Форма для вывода просьбы заполнить все необходимые поля-->
+          <div id="div-argumentinvalid"></div>
+          <!--Форма для вывода просьбы заполнить все необходимые поля-->
         </div>
         <div class="modal-footer">
-            <button id = "btn-addtale" type="button" class="btn btn-success">Створити</button>
+          <button id="btn-addtale" type="button" class="btn btn-success">Створити</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="modal-add-sentence" class="modal" tabindex="-1" role="dialog"> <!--Всплывающее окно для продолжения сказки-->
+  <div id="modal-add-sentence" class="modal" tabindex="-1" role="dialog">
+    <!--Всплывающее окно для продолжения сказки-->
   </div>
 
+  <div id="modal-random-tale" class="modal" tabindex="-1" role="dialog">
+    <!--Всплывающее окно для случайной сказки-->
+  </div>
+
+  <script type="text/javascript"> //Формирование всплывающего окна для рандомной законченной сказки
+    var token = '{{csrf_token}}';
+    $('.randomclosed').click
+      (
+        function () {
+          $.ajax
+            (
+              {
+                headers: { "X-CSRFToken": token },
+                url: "ajax/GetRandomResponse/",
+                type: "POST",
+                success: function (htmldata) {
+                  document.getElementById('modal-random-tale').innerHTML = htmldata;
+                }
+              }
+            )
+            .fail(function () {
+              alert("Random closed tale fail");
+            });
+        }
+      );
+  </script>
 
 
   <script type="text/javascript"> //Формирование всплывающего окна для продолжения сказки
+    var token = '{{csrf_token}}';
     $('.addclass').click
-    (
-        function()
-        {
-            var buttondata = $(this).attr("value")
-            $.ajax
+      (
+        function () {
+          var buttondata = $(this).attr("value")
+          $.ajax
             (
-                {
-                    url: "ajax/GetAddSentenceResponse/",
-                    type: "POST",
-                    data: {"buttonvalue": buttondata},
-                    success: function(htmldata)
+              {
+                headers: { "X-CSRFToken": token },
+                url: "ajax/GetAddSentenceResponse/",
+                type: "POST",
+                data: { "buttonvalue": buttondata },
+                success: function (htmldata) {
+                  document.getElementById('modal-add-sentence').innerHTML = htmldata;
+                  // Привязываем событие
+                  $('#btn-addsentence').bind('click', function (event) {
+                    var sentence = document.getElementById("txt-addsentence").value
+                    if (sentence.trim() !== '') //Проверка все ли поля заполнены
                     {
-                        document.getElementById('modal-add-sentence').innerHTML = htmldata;
-                        // Привязываем событие
-                        $('#btn-addsentence').bind('click',function(event)
+                      buttondata = $(this).attr("value")
+                      $.ajax
+                        (
                           {
-                            var sentence = document.getElementById("txt-addsentence").value
-                            if (sentence.trim() !== '') //Проверка все ли поля заполнены
-                            {
-                              $.ajax
-                              (
-                                  {
-                                      url: "ajax/AddSentence/",
-                                      type: "POST",
-                                      data: {
-                                        "sentence": sentence,
-                                        "taleid": buttondata,
-                                        },
-                                      success: function()
-                                      {
-                                          $('#modal-add-sentence').trigger('click.dismiss.bs.modal')
-                                      }
-                                  }
-                              )
-                              .fail(function() {
-                                alert("fail");
-                              });
-                              }
-                            else //Не все поля заполнены
-                            {
-                              document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
+                            headers: { "X-CSRFToken": token },
+                            url: "ajax/AddSentence/",
+                            type: "POST",
+                            data: {
+                              "sentence": sentence,
+                              "taleid": buttondata,
+                            },
+                            success: function () {
+                              $('#modal-add-sentence').trigger('click.dismiss.bs.modal')
                             }
-
-                            event.preventDefault();
-                          });
+                          }
+                        )
+                        .fail(function () {
+                          alert("fail");
+                        });
                     }
+                    else //Не все поля заполнены
+                    {
+                      document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
+                    }
+
+                    event.preventDefault();
+                  });
+                  // Привязываем событие окончания сказки
+                  $('#btn-closetale').bind('click', function (event) {
+                    var sentence = document.getElementById("txt-addsentence").value
+                    if (sentence.trim() !== '') //Проверка все ли поля заполнены
+                    {
+                      buttondata = $(this).attr("value")
+                      $.ajax
+                        (
+                          {
+                            headers: { "X-CSRFToken": token },
+                            url: "ajax/CloseTale/",
+                            type: "POST",
+                            data: {
+                              "sentence": sentence,
+                              "taleid": buttondata,
+                            },
+                            success: function () {
+                              $('#modal-add-sentence').trigger('click.dismiss.bs.modal')
+                              RefreshTales()
+                            }
+                          }
+                        )
+                        .fail(function () {
+                          alert("Tale closing system fail");
+                        });
+                    }
+                    else //Не все поля заполнены
+                    {
+                      document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
+                    }
+
+                    event.preventDefault();
+                  });
                 }
+              }
             )
-        .fail(function() {
-        alert("fail");
-        });
+            .fail(function () {
+              alert("fail");
+            });
         }
-    );
+      );
   </script>
 
 
   <script type="text/javascript"> //Обработчик кнопки добавления новой сказки
+    var token = '{{csrf_token}}';
     $('#btn-addtale').click
-    (
-        function()
-        {
-            var title = document.getElementById("txt-title").value
-            var firstsentence = document.getElementById("txt-sentence").value
-            if (title.trim() !== '' && firstsentence.trim() !== '') //Проверка все ли поля заполнены
-            {
-              $.ajax
+      (
+        function () {
+          var title = document.getElementById("txt-title").value
+          var firstsentence = document.getElementById("txt-sentence").value
+          if (title.trim() !== '' && firstsentence.trim() !== '') //Проверка все ли поля заполнены
+          {
+            $.ajax
               (
-                  {
-                      url: "ajax/AddTale/",
-                      type: "POST",
-                      data: {
-                        "title": title,
-                        "firstsentence" : firstsentence
-                        },
-                      success: function(htmldata)
-                      {
-                          $('#myModal').trigger('click.dismiss.bs.modal')
-                          $.ajax
-                          (
-                              {
-                                  url: "ajax/rfhtales/",
-                                  type: "POST",
-                                  success: function(htmldata)
-                                  {
-                                    document.getElementById('listoftales').innerHTML = htmldata;
-                                    // Привязываем событие
-                                    $('.addclass').bind('click',function(event)
-                                      {
-                                              var buttondata = $(this).attr("value")
-
-                                              $.ajax
-                                              (
-
-                                                  {
-                                                      url: "ajax/GetAddSentenceResponse/",
-                                                      type: "POST",
-                                                      data: {"buttonvalue": buttondata},
-                                                      success: function(htmldata)
-                                                      {
-                                                          document.getElementById('modal-add-sentence').innerHTML = htmldata;
-                                                          // Привязываем событие
-                                                          $('#btn-addsentence').bind('click',function(event)
-                                                            {
-                                                              var sentence = document.getElementById("txt-addsentence").value
-                                                              if (sentence.trim() !== '') //Проверка все ли поля заполнены
-                                                              {
-                                                                $.ajax
-                                                                (
-                                                                    {
-                                                                        url: "ajax/AddSentence/",
-                                                                        type: "POST",
-                                                                        data: {
-                                                                          "sentence": sentence,
-                                                                          "taleid": buttondata,
-                                                                          },
-                                                                        success: function()
-                                                                        {
-                                                                            $('#modal-add-sentence').trigger('click.dismiss.bs.modal')
-                                                                        }
-                                                                    }
-                                                                )
-                                                                .fail(function() {
-                                                                  alert("fail1");
-                                                                });
-                                                                }
-                                                              else //Не все поля заполнены
-                                                              {
-                                                                document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
-                                                              }
-
-                                                              event.preventDefault();
-                                                            });
-                                                      }
-                                                  }
-                                              )
-                                          .fail(function() {
-                                          alert("fail2");
-                                          });
-                                        event.preventDefault();
-                                      });
-                                  }
-                              }
-                          )
-                          .fail(function() {
-                            alert("fail3");
-                          });
-                      }
+                {
+                  headers: { "X-CSRFToken": token },
+                  url: "ajax/AddTale/",
+                  type: "POST",
+                  data: {
+                    "title": title,
+                    "firstsentence": firstsentence
+                  },
+                  success: function (htmldata) {
+                    $('#myModal').trigger('click.dismiss.bs.modal')
+                    RefreshTales()
                   }
+                }
               )
-              .fail(function() {
+              .fail(function () {
                 alert("fail");
               });
-              }
-            else //Не все поля заполнены
-            {
-              document.getElementById('div-argumentinvalid').innerHTML = "Будь ласка, заповніть усі поля.";
-            }
+          }
+          else //Не все поля заполнены
+          {
+            document.getElementById('div-argumentinvalid').innerHTML = "Будь ласка, заповніть усі поля.";
+          }
         }
-    );
+      );
+  </script>
+
+  <script type="text/javascript">
+    function RefreshTales() {
+      var token = '{{csrf_token}}';
+      $.ajax
+        (
+          {
+            headers: { "X-CSRFToken": token },
+            url: "ajax/rfhtales/",
+            type: "POST",
+            success: function (htmldata) {
+              document.getElementById('listoftales').innerHTML = htmldata;
+              // Привязываем событие
+              $('.addclass').bind('click', function (event) {
+                var buttondata = $(this).attr("value")
+                $.ajax
+                  (
+                    {
+                      headers: { "X-CSRFToken": token },
+                      url: "ajax/GetAddSentenceResponse/",
+                      type: "POST",
+                      data: { "buttonvalue": buttondata },
+                      success: function (htmldata) {
+                        document.getElementById('modal-add-sentence').innerHTML = htmldata;
+                        // Привязываем событие
+                        $('#btn-addsentence').bind('click', function (event) {
+                          var sentence = document.getElementById("txt-addsentence").value
+                          if (sentence.trim() !== '') //Проверка все ли поля заполнены
+                          {
+                            $.ajax
+                              (
+                                {
+                                  headers: { "X-CSRFToken": token },
+                                  url: "ajax/AddSentence/",
+                                  type: "POST",
+                                  data: {
+                                    "sentence": sentence,
+                                    "taleid": buttondata,
+                                  },
+                                  success: function () {
+                                    $('#modal-add-sentence').trigger('click.dismiss.bs.modal')
+                                  }
+                                }
+                              )
+                              .fail(function () {
+                                alert("fail1");
+                              });
+                          }
+                          else //Не все поля заполнены
+                          {
+                            document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
+                          }
+
+                          event.preventDefault();
+                        });
+                      }
+                    }
+                  )
+                  .fail(function () {
+                    alert("fail2");
+                  });
+                event.preventDefault();
+              });
+            }
+          }
+        )
+        .fail(function () {
+          alert("fail3");
+        });
+    };
   </script>
 
 </body>
