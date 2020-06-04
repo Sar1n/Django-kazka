@@ -25,6 +25,7 @@ def index(request):
             d.append(tale['id'])
     authortales = Tale.objects.all().filter(id__in=d, isFinished = 1).order_by('-dateFinished')
 
+
     context = {
         "alltales" : alltales,
         "membertales" : membertales,

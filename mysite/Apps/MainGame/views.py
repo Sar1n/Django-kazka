@@ -2,6 +2,7 @@ from django.shortcuts import render
 from mysite.Apps.Tales.models import *
 from datetime import datetime
 import random
+import collections
 
 from django.http import HttpResponse, Http404
 from django.views.generic.base import View
@@ -112,7 +113,7 @@ def GetRandomResponse(request):
         taletext = ""
         for sen in sentences:
             taletext += sen.Sentence
-            if (taletext[-1] != '.'):
+            if (taletext[-1] != '.') or (taletext[-1] != '!') or (taletext[-1] != '?'):
                 taletext += '.'
             taletext += ' '
         context = {
@@ -149,5 +150,63 @@ def CloseEdit(request):
         tale.isBeingWritten = 0
         tale.save()
         return HttpResponse()
+    else:
+        raise Http404
+
+def ShowStatistics(request):
+    if request.is_ajax():
+        not_complete = Tale.objects.all().filter(isFinished=0).count()
+        complete = Tale.objects.all().count() - not_complete
+
+        tales = Tale.objects.values('id').distinct()
+        authors = []
+        for tale in tales:
+            sent = Sentence.objects.values('id', 'authorID_id').filter(taleID_id = tale['id']).order_by('id')[0]
+            authors.append(sent['authorID_id'])
+        mostauthor = collections.Counter(authors).most_common()[0][0]
+        leastauthor = collections.Counter(authors).most_common()[-1][0]
+        mosthowmuch = collections.Counter(authors).most_common()[0][1]
+        leasthowmuch = collections.Counter(authors).most_common()[-1][1]
+        mostauthorname = User.objects.values('first_name', 'last_name').filter(id = mostauthor)[0]
+        mostauthornamesurname = mostauthorname['first_name'] + " " + mostauthorname['last_name']
+        leastauthorname = User.objects.values('first_name', 'last_name').filter(id = leastauthor)[0]
+        leastauthornamesurname = leastauthorname['first_name'] + " " + leastauthorname['last_name']
+
+        ten_fift = 0
+        sixt_twen = 0
+        twen_thir = 0
+        thir_fift = 0
+        fift_plus = 0
+        tales = Tale.objects.values('id').filter(isFinished=1).distinct()
+        for tale in tales:
+            sentcount = Sentence.objects.values('id').filter(taleID_id = tale['id']).count()
+            if sentcount < 16:
+                ten_fift += 1
+            else:
+                if sentcount < 21:
+                    sixt_twen += 1
+                else:
+                    if sentcount < 31:
+                        twen_thir += 1
+                    else:
+                        if sentcount < 51:
+                            thir_fift += 1
+                        else:
+                            fift_plus += 1
+
+        context = {
+            "not_complete" : not_complete,
+            "complete" : complete,
+            "ten_fift" : ten_fift,
+            "sixt_twen" : sixt_twen,
+            "twen_thir" : twen_thir,
+            "thir_fift" : thir_fift,
+            "fift_plus" : fift_plus,
+            "mostauthor" : mostauthornamesurname,
+            "leastauthor" : leastauthornamesurname,
+            "mosthowmuch" : mosthowmuch,
+            "leasthowmuch" : leasthowmuch,
+        }
+        return render(request, "statistics.html", context)
     else:
         raise Http404
