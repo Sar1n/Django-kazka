@@ -1,9 +1,8 @@
 stages:
-    - production
+    - deploy
 
 production:
-    stage: production
-    image: ruby:latest
+    stage: deploy
 	script:
 		- apt-get update -qy
     	- apt-get install -y ruby-dev
