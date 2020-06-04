@@ -12,4 +12,5 @@ urlpatterns = [
     path('ajax/GetRandomResponse/', views.GetRandomResponse, name='GetRandomResponse'),
     path('ajax/CloseTale/', views.CloseTale, name='CloseTale'),
     path('ajax/CloseEdit/', views.CloseEdit, name='CloseEdit'),
+    path('ajax/ShowStatistics/', views.ShowStatistics, name='ShowStatistics'),
 ]
