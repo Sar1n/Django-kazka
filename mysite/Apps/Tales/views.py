@@ -12,10 +12,10 @@ from django.http.response import JsonResponse
 
 def index(request):
     currentuser = request.user
-    alltales = Tale.objects.all().filter(isFinished=1)
+    alltales = Tale.objects.all().filter(isFinished=1).order_by('-dateFinished')
 
     b = Sentence.objects.values('taleID_id').filter(authorID_id = currentuser.id).distinct()
-    membertales = Tale.objects.all().filter(id__in=b, isFinished = 1)
+    membertales = Tale.objects.all().filter(id__in=b, isFinished = 1).order_by('-dateFinished')
 
     d = []
     tales = Tale.objects.values('id').distinct()
@@ -23,7 +23,7 @@ def index(request):
         sent = Sentence.objects.values('authorID_id').filter(taleID_id = tale['id']).order_by('id')[0]
         if sent['authorID_id'] == currentuser.id:
             d.append(tale['id'])
-    authortales = Tale.objects.all().filter(id__in=d, isFinished = 1)
+    authortales = Tale.objects.all().filter(id__in=d, isFinished = 1).order_by('-dateFinished')
 
     context = {
         "alltales" : alltales,

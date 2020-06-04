@@ -31,13 +31,18 @@ def GetAddSentenceResponse(request):
         taleid = request.POST.get('buttonvalue')
         if taleid != 'random':
             tale = Tale.objects.all().filter(id=taleid)[0]
-            lastsentence = Sentence.objects.all().filter(taleID=taleid).order_by('-id')[0]
+            if tale.isBeingWritten == 0:
+                lastsentence = Sentence.objects.all().filter(taleID=taleid).order_by('-id')[0]
+            else:
+                return render(request, "beignwritten.html")
         else:
-            B = Tale.objects.all().filter(isFinished = 0).count()
+            B = Tale.objects.all().filter(isFinished = 0, isBeingWritten = 0).count()
             randomid = random.randint(0, B-1)
-            tales = Tale.objects.all().filter(isFinished = 0)
+            tales = Tale.objects.all().filter(isFinished = 0, isBeingWritten = 0)
             tale = tales[randomid]
             lastsentence = Sentence.objects.all().filter(taleID=tale.id).order_by('-id')[0]
+        tale.isBeingWritten = 1
+        tale.save()
         context = {
                 "taletitle" : tale.TaleName,
                 "talelength" : tale.Length,
@@ -76,6 +81,7 @@ def AddSentence(request):
             tale = Tale.objects.all().filter(id=taleid)[0]
             tale.lastAuthorID = currentuser
             tale.Length += 1
+            tale.isBeingWritten = 0
             tale.save()
             sentence = Sentence(taleID = tale, dateAdded = datetime.now(), Sentence = request.POST['sentence'].capitalize(), authorID = currentuser)
             sentence.save()
@@ -133,5 +139,15 @@ def CloseTale(request):
             return HttpResponse()
         else:
             raise Http404
+    else:
+        raise Http404
+
+def CloseEdit(request):
+    if request.is_ajax():
+        taleid = request.POST['taleid']
+        tale = Tale.objects.all().filter(id = taleid)[0]
+        tale.isBeingWritten = 0
+        tale.save()
+        return HttpResponse()
     else:
         raise Http404

@@ -29,7 +29,12 @@
   <div class="row justify-content-md-center w-100">
     <div class="col-7">
       <div class="container text-white pt-5">
-        <h2>Поточні ігри</h2>
+
+        <div style="display: flex;">
+          <div style="flex: 1;"><h2>Поточні ігри</h2></div>
+          <div id="reload" style="width: 120px;"><a class="btn btn-lg btn-success btn-block">Оновити</a></div>
+        </div>
+
         <div class="table-wrapper-scroll-y my-custom-scrollbar scrollbar-dusty-grass">
           <table class="table table-dark">
             <thead>
@@ -46,7 +51,7 @@
                 <td>{{tale.TaleName}}</td>
                 <td>
                   <div class="addclass" value={{tale.id}}><button type="button" class="btn btn-info "
-                      data-toggle="modal" data-target="#modal-add-sentence">Продовжити казку</button></div>
+                      data-toggle="modal" data-target="#modal-add-sentence" data-backdrop="static" data-keyboard="false">Продовжити казку</button></div>
                 </td>
               </tr>
               {% endfor %}
@@ -65,7 +70,7 @@
               завершена казка</button></div>
           <div style="padding-top: 5px; padding-bottom: 5px;" class="addclass" value="random"><button type="button"
               class="btn  btn-lg btn-info text-white btn-block" data-toggle="modal"
-              data-target="#modal-add-sentence">Випадкова незавершена казка</button></div>
+              data-target="#modal-add-sentence" data-backdrop="static" data-keyboard="false">Випадкова незавершена казка</button></div>
           {% load static %}
           <img src="{% static "mainimage.svg" %}" alt="dude do be reading" class="img-fluid">
           <a class="btn  btn-lg btn-light btn-block"
@@ -173,7 +178,7 @@
                               "taleid": buttondata,
                             },
                             success: function () {
-                              $('#modal-add-sentence').trigger('click.dismiss.bs.modal')
+                              //Добавили предложение
                             }
                           }
                         )
@@ -205,7 +210,7 @@
                               "taleid": buttondata,
                             },
                             success: function () {
-                              $('#modal-add-sentence').trigger('click.dismiss.bs.modal')
+                              //закрыли сказку
                               RefreshTales()
                             }
                           }
@@ -219,6 +224,28 @@
                       document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
                     }
 
+                    event.preventDefault();
+                  });
+                  // Привязываем событие закрытия окна
+                  $('#CloseEdit').bind('click', function (event) {
+                      buttondata = $(this).attr("value")
+                      $.ajax
+                        (
+                          {
+                            headers: { "X-CSRFToken": token },
+                            url: "ajax/CloseEdit/",
+                            type: "POST",
+                            data: {
+                              "taleid": buttondata,
+                            },
+                            success: function () {
+                             // $('#modal-add-sentence').trigger('click.dismiss.bs.modal')
+                            }
+                          }
+                        )
+                        .fail(function () {
+                          alert("Closing edit window fail");
+                        });
                     event.preventDefault();
                   });
                 }
@@ -320,9 +347,65 @@
                           {
                             document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
                           }
+                          event.preventDefault();
+                        });
+
+                        // Привязываем событие окончания сказки
+                        $('#btn-closetale').bind('click', function (event) {
+                          var sentence = document.getElementById("txt-addsentence").value
+                          if (sentence.trim() !== '') //Проверка все ли поля заполнены
+                          {
+                            buttondata = $(this).attr("value")
+                            $.ajax
+                              (
+                                {
+                                  headers: { "X-CSRFToken": token },
+                                  url: "ajax/CloseTale/",
+                                  type: "POST",
+                                  data: {
+                                    "sentence": sentence,
+                                    "taleid": buttondata,
+                                  },
+                                  success: function () {
+                                    //закрыли сказку
+                                    RefreshTales()
+                                  }
+                                }
+                              )
+                              .fail(function () {
+                                alert("Tale closing system fail");
+                              });
+                          }
+                          else //Не все поля заполнены
+                          {
+                            document.getElementById('div-argumentinvalid-2').innerHTML = "Будь ласка, напишіть своє речення.";
+                          }
 
                           event.preventDefault();
                         });
+                        // Привязываем событие закрытия окна
+                        $('#CloseEdit').bind('click', function (event) {
+                            buttondata = $(this).attr("value")
+                            $.ajax
+                              (
+                                {
+                                  headers: { "X-CSRFToken": token },
+                                  url: "ajax/CloseEdit/",
+                                  type: "POST",
+                                  data: {
+                                    "taleid": buttondata,
+                                  },
+                                  success: function () {
+                                  // $('#modal-add-sentence').trigger('click.dismiss.bs.modal')
+                                  }
+                                }
+                              )
+                              .fail(function () {
+                                alert("Closing edit window fail");
+                              });
+                          event.preventDefault();
+                        });
+
                       }
                     }
                   )
@@ -339,6 +422,15 @@
         });
     };
   </script>
+
+<script type="text/javascript"> //Обновить список
+  $('#reload').click
+    (
+      function () {
+        RefreshTales()
+      }
+    );
+</script>
 
 </body>
 {% endblock %}
