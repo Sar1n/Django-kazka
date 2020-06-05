@@ -1,1 +1,1 @@
-web: gunicorn kazkaprod.py --log-file -
+web: gunicorn mysite.wsgi --log-file -
