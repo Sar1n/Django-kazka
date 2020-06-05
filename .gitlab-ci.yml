@@ -1,11 +1,11 @@
 stages:
-    - production
+    - deploy
 
-production:
-    type: deploy
-    stage: production
-    image: Dockerfile:latest
-    script:
-        - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
-    only:
-        - master
+staging:
+  image: ruby:2.3
+  stage: deploy
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY --strategy=git
+  only:
+    - master
