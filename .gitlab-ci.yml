@@ -1,3 +1,7 @@
+stages:
+  - test
+  - deploy
+
 production:
  stage: deploy
  only:
