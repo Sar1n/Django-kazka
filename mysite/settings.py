@@ -40,7 +40,7 @@ LOGGING = {
 SECRET_KEY = 'yd0zu_g&ph&9k+4r#7^hue=0(v_$2$nq9c)$v0c_o3pf)o4o+9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 #ALLOWED_HOSTS = ['kazka.herokuapp.com', 'localhost']
 ALLOWED_HOSTS = ['*']
@@ -85,7 +85,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'mysite.urls'
 
