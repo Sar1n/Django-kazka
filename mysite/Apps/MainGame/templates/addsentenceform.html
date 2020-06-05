@@ -11,21 +11,28 @@
       </div>
       <div class="modal-body">
         <h4>... {{lastsentence.Sentence}}</h4>
-        <form>
-        <div class="form-group">
-          <textarea id="txt-addsentence" class="form-control" wrap="soft" placeholder="Продовжіть казку..."></textarea>
-          <div id="div-argumentinvalid-2"></div>
-          <div id="div-test"></div>
-        </div>
-        </form>
+        
+        {% if isallowed %}
+          <form>
+          <div class="form-group">
+            <textarea id="txt-addsentence" class="form-control" wrap="soft" placeholder="Продовжіть казку..."></textarea>
+            <div id="div-argumentinvalid-2"></div>
+            <div id="div-test"></div>
+          </div>
+          </form>
+        {% endif %}
       </div>
       <div class="modal-footer">
+        {% if isallowed %}
           <div id="btn-closetale" value = "{{taleid}}">
             {% if talelength >= 3 %}
               <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Завершити</button>
             {% endif %}
           </div>
           <button id="btn-addsentence" type="button" class="btn btn-success" data-dismiss="modal" value = "{{taleid}}">Продовжити</button>
+        {% else %}
+          <p>Ви додали останнє речення у цю казку. Правила гри не дозволяють добавляти 2 речення поспіль. Доповніть іншу казку, або поверніться до цієї пізніше.</p>
+        {% endif %}
       </div>
     </div>
   </div>

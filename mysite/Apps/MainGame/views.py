@@ -26,20 +26,23 @@ def index(request):
     }
     return render(request, 'MainBody.html', context)
 
-
 def GetAddSentenceResponse(request):
     if request.is_ajax():
+        currentuser = request.user
         taleid = request.POST.get('buttonvalue')
+        isallowed = True
         if taleid != 'random':
             tale = Tale.objects.all().filter(id=taleid)[0]
             if tale.isBeingWritten == 0:
                 lastsentence = Sentence.objects.all().filter(taleID=taleid).order_by('-id')[0]
             else:
                 return render(request, "beignwritten.html")
+            if tale.lastAuthorID_id == currentuser.id:
+                isallowed = False
         else:
-            B = Tale.objects.all().filter(isFinished = 0, isBeingWritten = 0).count()
+            B = Tale.objects.all().filter(isFinished = 0, isBeingWritten = 0).exclude(lastAuthorID_id = currentuser.id).count()
             randomid = random.randint(0, B-1)
-            tales = Tale.objects.all().filter(isFinished = 0, isBeingWritten = 0)
+            tales = Tale.objects.all().filter(isFinished = 0, isBeingWritten = 0).exclude(lastAuthorID_id = currentuser.id)
             tale = tales[randomid]
             lastsentence = Sentence.objects.all().filter(taleID=tale.id).order_by('-id')[0]
         tale.isBeingWritten = 1
@@ -49,12 +52,11 @@ def GetAddSentenceResponse(request):
                 "talelength" : tale.Length,
                 "lastsentence" : lastsentence,
                 "taleid" : tale.id,
+                "isallowed" : isallowed,
             }
         return render(request, "addsentenceform.html", context)
     else:
         raise Http404
-    
-
 
 def AddTale(request):
     if request.is_ajax():
@@ -71,8 +73,6 @@ def AddTale(request):
             raise Http404
     else:
         raise Http404
-
-
 
 def AddSentence(request):
     if request.is_ajax():
@@ -91,7 +91,6 @@ def AddSentence(request):
             raise Http404
     else:
         raise Http404
-
 
 def rfhtales(request):
     if request.is_ajax():
